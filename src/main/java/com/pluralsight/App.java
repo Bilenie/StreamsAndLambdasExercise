@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class App {
 
@@ -12,10 +13,17 @@ public class App {
         characters.add(new Character("Anakin Skywalker", 188, 84, "blue", "male"));
 
         // 1. Print names in UPPERCASE using map and forEach
-
+        characters.stream()
+                .map(character -> character.getName().toUpperCase())
+                .forEach(name -> System.out.println(name));
 
         // 2. Filter characters with mass > 80 using .filter and .collect(Collectors.toList())
         // store the results in a variable called heavyCharacters and display the new list
+        List<Character> heavyCharacters = characters.stream() //we want to create a list for our filter
+                .filter(character -> character.getMass() > 80)//filter by mass
+                .toList();// once is done turn to list
+        //loop through the list and get the name and mass of filtered mass and display it.
+        heavyCharacters.forEach(character -> System.out.println(character.getName() + " " + character.getMass()));
 
 
         // 3. Create a new list of just character names using .filter and .collect(Collectors.toList())
