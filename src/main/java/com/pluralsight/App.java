@@ -19,8 +19,8 @@ public class App {
 
         // 2. Filter characters with mass > 80 using .filter and .collect(Collectors.toList())
         // store the results in a variable called heavyCharacters and display the new list
-        List<Character> heavyCharacters = characters.stream() //we want to create a list for our filter
-                .filter(character -> character.getMass() > 80)//filter by mass
+        List<Character> heavyCharacters = characters.stream() //we want to create a list for our filter. our list type is String not object.
+                .filter(character -> character.getMass() > 80)//filter by mass return the whole object
                 .toList();// once is done turn to list
         //loop through the list and get the name and mass of filtered mass and display it.
         heavyCharacters.forEach(character -> System.out.println(character.getName() + " " + character.getMass()));
@@ -28,15 +28,39 @@ public class App {
 
         // 3. Create a new list of just character names using .filter and .collect(Collectors.toList())
         // the new list should be called names. Display the new list with a loop
-
+        List<String> name = characters.stream() //we want to create a list for our filter
+                .map(character -> character.getName())//filter by name only . return only the items.
+                .toList();// once is done turn to list
+        //loop through the list and get the name filtered and display it.
+        name.forEach(n -> System.out.println(name));
 
         // 4. Use anyMatch to check for blue eyes and let us know if any character has blue eyes
-
+        //create a boolean and lable it hasBlueEyes that hold the stream.
+        boolean hasBlueEyes = characters.stream()
+                .anyMatch(character -> character.getEyeColor().equalsIgnoreCase("blue"));//Any character that match this condition will be true if not be false.
+        if(hasBlueEyes){
+            System.out.println("Some Characters have blue eyes");
+        }else{
+            System.out.println("No Characters have blue eyes");
+        }
 
         // 5. Use allMatch to check if all are male and let us know if all characters are male
 
+        boolean hasMale = characters.stream()
+                .allMatch(character -> character.getGender().equalsIgnoreCase("male"));//All character that match this condition will be true if not be false.
+        if(hasMale){
+            System.out.println("Some Characters are Males");
+        }else{
+            System.out.println("No Characters are Males");
+        }
 
         // 6. Use .mapToInt and .sum to calculate total mass of all characters and then display the total mass
+
+        int totalMass = characters.stream()
+                .mapToInt(character -> character.getMass())
+                .sum();
+        System.out.println("Total mass : " + totalMass);
+        System.out.println("Average mass : " + totalMass / characters.size());
 
     }
 
