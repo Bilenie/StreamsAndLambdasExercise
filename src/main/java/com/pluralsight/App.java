@@ -75,6 +75,7 @@ public class App {
             totalMass += c.getMass();
         }
         System.out.println("Total mass: " + totalMass);
+        System.out.println("Thank you!!");
     }
 
 
